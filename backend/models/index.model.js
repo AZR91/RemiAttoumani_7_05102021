@@ -5,7 +5,11 @@ const dotenv = require('dotenv').config()
 const db = {}
 
 // @ts-ignore
-const sequelize = new Sequelize('mysql://root:root@localhost:3306/')
+const sequelize = new Sequelize(process.env.DB_database, process.env.DB_username,process.env.DB_password, {
+    host: process.env.DB_host,
+    port: process.env.DB_port,
+    dialect: process.env.DB_dialect
+});
 
 db.Gif = require('./Gif.model')(sequelize, Sequelize);
 db.User = require('./User.model')(sequelize, Sequelize);
