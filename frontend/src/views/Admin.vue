@@ -84,7 +84,7 @@
 
 <script>
 import axios from "axios"
-import navBar from '../components/navBar.ce.vue'
+import navBar from '../components/NavBar.ce.vue'
 import allProfiles from '../components/allProfiles.ce.vue'
 import allComments from '../components/allComments.ce.vue'
 export default {

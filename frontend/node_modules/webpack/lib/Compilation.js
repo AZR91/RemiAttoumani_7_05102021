@@ -1883,7 +1883,7 @@ BREAKING CHANGE: Asset processing hooks in Compilation has been merged into a si
 					creatingModuleDuringBuildSet
 				);
 			}
-			creatingModuleDuringBuildSet.add(originModule);
+			creatingModuleDuringBuildSet.add(module);
 
 			// When building is blocked by another module
 			// search for a cycle, cancel the cycle by throwing
@@ -4687,21 +4687,18 @@ This prevents using hashes of each other and should be avoided.`);
 			 * @returns {void}
 			 */
 			(module, push, callback) => {
-				this.addModuleQueue.waitFor(module, err => {
+				this.buildQueue.waitFor(module, err => {
 					if (err) return callback(err);
-					this.buildQueue.waitFor(module, err => {
+					this.processDependenciesQueue.waitFor(module, err => {
 						if (err) return callback(err);
-						this.processDependenciesQueue.waitFor(module, err => {
-							if (err) return callback(err);
-							for (const {
-								module: m
-							} of this.moduleGraph.getOutgoingConnections(module)) {
-								const size = modules.size;
-								modules.add(m);
-								if (modules.size !== size) push(m);
-							}
-							callback();
-						});
+						for (const { module: m } of this.moduleGraph.getOutgoingConnections(
+							module
+						)) {
+							const size = modules.size;
+							modules.add(m);
+							if (modules.size !== size) push(m);
+						}
+						callback();
 					});
 				});
 			},
