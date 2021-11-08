@@ -8,7 +8,10 @@
 </template> 
 
 <script>
-localStorage.clear()
+window.localStorage.removeItem("token");
+window.localStorage.removeItem("userId");
+window.localStorage.removeItem("isAdmin");
+window.localStorage.clear();
 export default {
     created() {
         setTimeout(() => this.$router.push({ path: '/' }), 5000);

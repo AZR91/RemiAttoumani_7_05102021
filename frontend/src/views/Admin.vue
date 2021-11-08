@@ -13,9 +13,8 @@
                     <div
                         id="allProfiles"
                         v-for="user in users"
-                        :key="user"
+                        v-bind:key="user"
                         class="col d-flex flex-column mx-auto"
-                        v-bind="user"
                     >
                         <allProfiles v-bind="user"></allProfiles>
                     </div>
@@ -35,7 +34,7 @@
                             <figcaption class="h4 text-primary">{{ gif.statusText }}</figcaption>
                             <p
                                 v-for="(user) in users.filter((user) => { return user.id == gif.userId })"
-                            >
+                            v-bind:key="user.userId">
                                 publié par
                                 <strong>{{ user.firstName }} {{ user.lastName }}</strong>
                             </p>
@@ -56,7 +55,7 @@
                                     {{ comment.content }}
                                     <span
                                         v-for="(user) in users.filter((user) => { return user.id == comment.userId })"
-                                    >
+                                     :key="user.userId">
                                         par
                                         <strong>{{ user.firstName }} {{ user.lastName }}</strong>
                                     </span>

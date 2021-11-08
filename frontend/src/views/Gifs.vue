@@ -11,6 +11,11 @@ import navBar from '../components/NavBar.ce.vue'
 import gif from '../components/gif.ce.vue'
 import postGifForm from '../components/postGifForm.ce.vue'
 export default {
+    created(){
+        if(localStorage.getItem("userId") == null) {
+            this.$router.push('/');
+        }
+    },
     name: 'Gifs',
     components: {
         postGifForm,

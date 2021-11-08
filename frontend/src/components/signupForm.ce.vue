@@ -26,6 +26,14 @@
                 @click.prevent="signup"
             >Enregistrer les informations</button>
         </form>
+        <!-- Affichage des messages -->
+        <div :class="{'help is-danger': isAlert, 'help is-success': !isAlert}" v-if="errorMessage.length != 0">
+            <div>
+                <div class="input-errors" v-for="error in errorMessage" :key="error.message">
+                                          <div class="help is-danger">{{ error.message }}</div>
+                                        </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -37,11 +45,13 @@ export default {
             firstName: "",
             lastName: "",
             email: "",
-            password: ""
+            password: "",
+            errorMessage: ""
         }
     },
     methods: {
         signup() {
+            this.errorMessage = "";
             this.errorAlert = false;
             axios.post('http://localhost:3001/api/users/signup', {
                 firstName: document.getElementById('firstName').value,
@@ -53,8 +63,10 @@ export default {
                 
                     this.$router.push('/registered');
                 })
-                .catch(() => {
-                    this.errorAlert = true
+                .catch((error) => {
+                    this.errorMessage = error.response.data.error.errors;
+                    console.log(error.response.data.error);
+                    this.errorAlert = true;
                 })
         }
     }

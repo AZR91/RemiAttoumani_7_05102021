@@ -6,7 +6,6 @@ module.exports = (sequelize, Sequelize) => {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-        is: /^[a-z]+$/i,
         notEmpty: true,
         len: [2,25]
     }
@@ -15,7 +14,6 @@ module.exports = (sequelize, Sequelize) => {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-        is: /^[a-z]+$/i,
         notEmpty: true,
         len: [2,25]
     }
@@ -25,9 +23,7 @@ module.exports = (sequelize, Sequelize) => {
     allowNull: false,
     unique: 'email',
     validate: {
-        isEmail: true,
-        notEmpty: true,
-        is: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+        notEmpty: true
     }
     },
     password: {

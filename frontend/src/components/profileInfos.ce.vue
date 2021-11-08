@@ -11,10 +11,10 @@
             <strong>Nom:</strong>
             {{ user.lastName }}
         </p>
-        <p>
+        <!--<p>
             <strong>Email:</strong>
             {{ user.email }}
-        </p>
+        </p> -->
         <p v-if="user.isAdmin === true">
             <strong>Rôle:</strong> Admin
         </p>

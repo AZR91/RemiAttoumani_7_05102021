@@ -11,10 +11,10 @@
             <strong>Nom:</strong>
             {{ $attrs.lastName }}
         </p>
-        <p>
+        <!--<p>
             <strong>Email:</strong>
             {{ $attrs.email }}
-        </p>
+        </p> -->
         <p v-if="$attrs.isAdmin === true">
             <strong>Rôle:</strong> Admin
         </p>
